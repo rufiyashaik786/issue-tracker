@@ -1,0 +1,101 @@
+<div class="detail-container" *ngIf="issue">
+  <!-- HEADER -->
+  <div class="card shadow-sm p-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+      <h2 class="mb-0">{{ issue.title }}</h2>
+
+      <div class="d-flex gap-2 mt-2 mt-md-0">
+        <button class="btn btn-primary" (click)="edit()">Edit</button>
+        <button class="btn btn-danger" (click)="confirmDelete()">Delete</button>
+        <button class="btn btn-secondary" (click)="goBack()">Back</button>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <div class="mb-3">
+      <span class="badge bg-info me-2">Status: {{ issue.status }}</span>
+      <span class="badge bg-warning text-dark">Priority: {{ issue.priority }}</span>
+    </div>
+    <span
+      [ngClass]="{
+        'badge-open': issue.status === 'OPEN',
+        'badge-progress': issue.status === 'IN_PROGRESS',
+        'badge-closed': issue.status === 'CLOSED',
+        'badge-resolved': issue.status === 'RESOLVED'
+      }"
+    >
+      {{ issue.status }}
+    </span>
+
+    <!-- Metadata -->
+    <div class="text-muted small">
+      <p><strong>Created:</strong> {{ issue.createdAt | date : 'medium' }}</p>
+      <p><strong>Updated:</strong> {{ issue.updatedAt | date : 'medium' }}</p>
+    </div>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="card shadow-sm p-4 mb-4">
+    <h4>Description</h4>
+    <p class="mt-2">{{ issue.description }}</p>
+  </div>
+
+  <!-- UPLOAD SECTION -->
+  <div class="card shadow-sm p-4 mb-4">
+    <h4>Upload Attachment</h4>
+
+    <div class="d-flex flex-wrap gap-2 mt-3">
+      <input type="file" (change)="onFileSelected($event)" class="form-control w-auto" />
+      <button class="btn btn-success" (click)="upload()">Upload</button>
+    </div>
+
+    <p class="text-info mt-2" *ngIf="uploadMessage">{{ uploadMessage }}</p>
+  </div>
+
+  <!-- ATTACHMENTS -->
+  <div class="card shadow-sm p-4">
+    <h4>Attachments</h4>
+
+    <table class="table table-striped mt-3" *ngIf="issue.attachments?.length">
+      <thead class="table-dark">
+        <tr>
+          <th>File Name</th>
+          <th>Type</th>
+          <th>Uploaded At</th>
+          <th style="width: 150px">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let file of issue.attachments">
+          <td>{{ file.fileName }}</td>
+          <td>{{ file.fileType }}</td>
+          <td>{{ file.uploadedAt | date : 'medium' }}</td>
+
+          <td class="d-flex gap-2">
+            <button class="btn btn-sm btn-primary" (click)="downloadAttachment(file.id)">
+              Download
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="deleteAttachment(file.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="!issue.attachments?.length" class="text-muted">No attachments uploaded.</p>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div *ngIf="loading" class="text-center py-5">
+  <div class="spinner-border"></div>
+  <p class="mt-2 text-muted">Loading issue...</p>
+</div>
+<div class="card p-3" style="border-radius: 12px">
+  <div class="row g-3">
+    <div class="col-md-8">... description etc ...</div>
+    <div class="col-md-4">... metadata & attachments ...</div>
+  </div>
+</div>

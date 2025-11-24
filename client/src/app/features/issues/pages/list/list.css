@@ -1,0 +1,37 @@
+/* ===== LIST PAGE THEME - BLUE ===== */
+
+/* Font */
+.list-container {
+  font-family: 'Roboto', sans-serif;
+  background: #e6f2ff; /* light blue */
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* Card */
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+.btn-primary {
+  background: #1a73e8; /* royal blue */
+  border-radius: 12px;
+}
+
+.btn-outline-secondary {
+  border: 2px solid #6bb4ff; /* sky blue outline */
+  border-radius: 12px;
+}
+
+.btn-outline-danger {
+  border-radius: 12px;
+}
+
+/* Table */
+table {
+  border-radius: 12px !important;
+  overflow: hidden;
+}

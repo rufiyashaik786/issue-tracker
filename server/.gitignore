@@ -1,0 +1,14 @@
+# Backend
+target/
+*.log
+
+# Frontend
+issue-tracker-frontend/node_modules/
+issue-tracker-frontend/.angular/
+issue-tracker-frontend/dist/
+issue-tracker-frontend/.env
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/

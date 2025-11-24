@@ -1,0 +1,37 @@
+/* ===== NEW ISSUE PAGE THEME - GREEN ===== */
+
+.new-container {
+  font-family: 'Poppins', sans-serif;
+  background: #e6ffe6; /* light green */
+  padding: 20px;
+  border-radius: 15px;
+}
+
+/* Card look for form */
+form {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Buttons */
+button[type='submit'] {
+  background: #2e8b57; /* forest green */
+  color: white;
+  border-radius: 15px;
+}
+
+button.secondary {
+  border: 2px solid #7fff7f; /* lime outline */
+  background: transparent;
+  color: #2e8b57;
+  border-radius: 15px;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  border-radius: 12px;
+}

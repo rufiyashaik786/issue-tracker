@@ -1,0 +1,49 @@
+.dashboard-container {
+  padding: 20px;
+}
+
+.stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 200px;
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.stat-card p {
+  margin: 5px 0 0;
+  font-size: 16px;
+}
+
+/* Colors */
+.blue {
+  background: #2196f3;
+}
+.green {
+  background: #4caf50;
+}
+.orange {
+  background: #ff9800;
+}
+.purple {
+  background: #9c27b0;
+}
+.red {
+  background: #f44336;
+}
+.teal {
+  background: #009688;
+}

@@ -1,0 +1,30 @@
+/* ===== EDIT ISSUE PAGE THEME - YELLOW/ORANGE ===== */
+
+.edit-container {
+  font-family: 'Inter', sans-serif;
+  background: #fff8e1; /* light yellow */
+  padding: 20px;
+  border-radius: 15px;
+}
+
+/* Form Card */
+form {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Buttons */
+button[type='submit'] {
+  background: #fb8c00; /* orange */
+  color: white;
+  border-radius: 15px;
+}
+
+button.secondary {
+  border: 2px solid #ffca28; /* amber outline */
+  background: transparent;
+  color: #fb8c00;
+  border-radius: 15px;
+}

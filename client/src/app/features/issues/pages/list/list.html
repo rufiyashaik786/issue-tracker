@@ -1,0 +1,145 @@
+<div class="list-container">
+  <!-- HEADER -->
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+    <h2 class="mb-2">Issues</h2>
+    <button class="btn btn-primary" routerLink="/issues/new">+ New Issue</button>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="card shadow-sm p-3 mb-4">
+    <div class="row g-3 align-items-center">
+      <!-- Search -->
+      <div class="col-md-4">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by title..."
+          [(ngModel)]="searchText"
+          (input)="onFilterChange()"
+        />
+      </div>
+
+      <!-- Status Filter -->
+      <div class="col-md-3">
+        <select class="form-select" [(ngModel)]="statusFilter" (change)="onFilterChange()">
+          <option value="">All Statuses</option>
+          <option value="OPEN">Open</option>
+          <option value="IN_PROGRESS">In Progress</option>
+          <option value="RESOLVED">Resolved</option>
+          <option value="CLOSED">Closed</option>
+        </select>
+      </div>
+
+      <!-- Priority Filter -->
+      <div class="col-md-3">
+        <select class="form-select" [(ngModel)]="priorityFilter" (change)="onFilterChange()">
+          <option value="">All Priorities</option>
+          <option value="LOW">Low</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="HIGH">High</option>
+        </select>
+      </div>
+
+      <!-- Sort Button -->
+      <div class="col-md-2">
+        <button class="btn btn-outline-secondary w-100" (click)="toggleSort()">
+          Sort Created
+          <span *ngIf="sortDirection === 'asc'">↑</span>
+          <span *ngIf="sortDirection === 'desc'">↓</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div *ngIf="loading" class="text-center py-4">
+    <div class="spinner-border"></div>
+    <p class="mt-2 text-muted">Loading issues...</p>
+  </div>
+
+  <!-- TABLE -->
+  <div class="card shadow-sm p-0" *ngIf="!loading">
+    <table class="table table-striped mb-0">
+      <thead class="table-dark">
+        <tr>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Created</th>
+          <th style="width: 130px">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let issue of issues">
+          <td>
+            <a [routerLink]="['/issues', issue.id]" class="link-primary fw-bold">
+              {{ issue.title }}
+            </a>
+          </td>
+
+          <td>
+            <span
+              class="badge"
+              [ngClass]="{
+                'bg-info': issue.status === 'OPEN',
+                'bg-warning text-dark': issue.status === 'IN_PROGRESS',
+                'bg-success': issue.status === 'RESOLVED',
+                'bg-secondary': issue.status === 'CLOSED'
+              }"
+            >
+              {{ issue.status }}
+            </span>
+          </td>
+
+          <td>
+            <span
+              class="badge"
+              [ngClass]="{
+                'bg-secondary': issue.priority === 'LOW',
+                'bg-primary': issue.priority === 'MEDIUM',
+                'bg-danger': issue.priority === 'HIGH'
+              }"
+            >
+              {{ issue.priority }}
+            </span>
+          </td>
+
+          <td>{{ issue.createdAt | date : 'short' }}</td>
+
+          <td class="d-flex gap-1">
+            <button
+              class="btn btn-sm btn-outline-primary"
+              [routerLink]="['/issues', issue.id, 'edit']"
+            >
+              Edit
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteIssue(issue.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- EMPTY -->
+    <div *ngIf="issues.length === 0" class="text-center p-4 text-muted">No issues found.</div>
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="d-flex justify-content-between align-items-center mt-3">
+    <button class="btn btn-outline-secondary" (click)="prevPage()" [disabled]="page === 0">
+      Previous
+    </button>
+
+    <span>Page {{ page + 1 }} of {{ totalPages }}</span>
+
+    <button
+      class="btn btn-outline-secondary"
+      (click)="nextPage()"
+      [disabled]="page + 1 >= totalPages"
+    >
+      Next
+    </button>
+  </div>
+</div>
